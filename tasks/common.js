@@ -31,7 +31,7 @@ function css(path){
   var dest    = 'dist/' + path;
 
   return function(){
-    gulp.src(path)
+    gulp.src(entries)
       .pipe(sass())
       .pipe(autoprefixer())
       .pipe(gulp.dest(dest))

@@ -5,7 +5,9 @@ const connection = require('../lib/connection');
 
 console.log('presenter');
 
-const ws = connection();
-ws.onValue(message => {
-  console.log(message);
+connection(receive => {
+  const send = Bacon.once('presenter').delay(100);
+  receive.onValue(message => console.log(message));
+
+  return send;
 });

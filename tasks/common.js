@@ -44,7 +44,7 @@ function html(path){
   var dest    = 'dist/' + path;
 
   return function(){
-    gulp.src('index.html')
+    gulp.src(entries)
       .pipe(gulp.dest(dest))
       .pipe(connect.reload());
   };

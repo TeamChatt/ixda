@@ -9,6 +9,7 @@
   "author": "Chelsea Hostetter, Ahmed Riaz, Matt Kaemmerer, Tim Vaughan",
   "license": "MIT",
   "dependencies": {
+    "baconjs": "^0.7.83",
     "ws": "^0.8.1"
   },
   "devDependencies": {

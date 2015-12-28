@@ -1,0 +1,23 @@
+{
+  "name": "ixda",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Chelsea Hostetter, Ahmed Riaz, Matt Kaemmerer, Tim Vaughan",
+  "license": "MIT",
+  "dependencies": {
+    "ws": "^0.8.1"
+  },
+  "devDependencies": {
+    "babelify": "^7.2.0",
+    "browserify": "^12.0.1",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-connect": "^2.3.1",
+    "gulp-sass": "^2.1.1",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

@@ -8,7 +8,7 @@ module.exports = function serverEvents(wss){
     .flatMap((ws) => Bacon
         .fromEvent(ws, 'message')
         .map(msg => {
-          return {connection: ws, message: msg}
+          return {connection: ws, message: msg};
         })
       );
   const closed_connection = new_connections
@@ -22,4 +22,4 @@ module.exports = function serverEvents(wss){
     messages:          messages,
     closed_connection: closed_connection
   };
-}
+};

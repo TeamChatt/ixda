@@ -1,0 +1,47 @@
+//Base Styles
+.button {
+  cursor: pointer;
+  border: 0;
+  font: inherit;
+}
+.button {
+  color: #000;
+  background-color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+//Circular Variation
+.button--circular {
+  border-radius: 100%;
+}
+
+//Button Containers
+.buttons--horizontal,
+.buttons--vertical {
+  display: flex;
+  align-items: center;
+
+  .button {
+    display: flex;
+    padding: 0;
+    margin:  1rem;
+
+    flex:    1;
+    align-items:     center;
+    justify-content: center;
+  }
+  .button:before {
+    //HACK: padding-top 100% forces 1:1 aspect ratio
+  	content: '';
+  	display: block;
+  	padding-top: 100%;
+    float: left;
+  }
+}
+.buttons--horizontal {
+  flex-direction: row;
+}
+.buttons--vertical {
+  flex-direction: column;
+  align-items: stretch;
+}

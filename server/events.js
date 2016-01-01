@@ -23,4 +23,4 @@ module.exports = function serverEvents(wss){
     evst_message:         evst_message,
     evst_ws_closed:       evst_ws_closed
   };
-}
+};

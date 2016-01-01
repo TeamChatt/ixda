@@ -1,3 +1,88 @@
-body {
-  font-family: sans-serif;
+@import "../lib/css/base";
+
+//Layout
+.main {
+  position: absolute;
+  top:      0;
+  bottom:   0;
+  left:     0;
+  right:    0;
+
+  max-width: 640px;
+  background-color: #CDCDCD;
+
+  display:        flex;
+  flex-direction: row;
+  align-items:    stretch;
+  overflow:       hidden;
+}
+
+//Menus
+.menu {
+  width: 100%;
+
+  display:        flex;
+  flex-direction: column;
+}
+.menu--offscreen {
+  position: absolute;
+  top:      0;
+  bottom:   0;
+
+  background-color: #636363;
+}
+.menu--offscreen-left {
+  left: -4rem;
+  margin-left: 4rem;
+  width: calc(100% - 4rem);
+  transition: left 0.25s;
+}
+.menu--offscreen-right {
+  right: -4rem;
+  margin-right: 4rem;
+  width: calc(100% - 4rem);
+  transition: right 0.25s;
+}
+.menu--offscreen-left.is-hidden {
+  left: -100%;
+}
+.menu--offscreen-right.is-hidden {
+  right: -100%;
+}
+
+//Notifications
+.notification {
+  position: fixed;
+  top:   0;
+  left:  0;
+  right: 0;
+
+
+  height: 6rem;
+  background-color: #FFFFFF;
+}
+.notification.is-hidden {
+  top: -100%;
+}
+
+
+//Top-level menu layout
+#menu-top-level {
+  .sprite {
+    flex: 1;
+  }
+  .controls {
+    text-align: center;
+    background-color: #989898;
+  }
+}
+#defend-menu {
+  text-align: center;
+  color: #FFF;
+
+  .controls {
+    margin-right: 8rem;
+    margin-left: 8rem;
+    flex: 1;
+  }
 }

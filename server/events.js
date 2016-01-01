@@ -3,23 +3,24 @@
 const Bacon = require('baconjs');
 
 module.exports = function serverEvents(wss){
-  const new_connections   = Bacon.fromEvent(wss, 'connection');
-  const messages          = new_connections
+  const evst_ws_connections   = Bacon.fromEvent(wss, 'connection');
+  const evst_message      = evst_ws_connections
     .flatMap((ws) => Bacon
         .fromEvent(ws, 'message')
-        .map(msg => {
-          return {connection: ws, message: msg}
+        .map(st_content => {
+          return {ws_sender: ws, st_content: st_content} // message
         })
       );
-  const closed_connection = new_connections
+  const evst_ws_closed = evst_ws_connections
     .flatMap((ws) => Bacon
         .fromEvent(ws, 'close')
         .map(ws)
       );
 
-  return {
-    new_connections:   new_connections,
-    messages:          messages,
-    closed_connection: closed_connection
+  // server
+  return  {
+    evst_ws_connections:  evst_ws_connections,
+    evst_message:         evst_message,
+    evst_ws_closed:       evst_ws_closed
   };
 }

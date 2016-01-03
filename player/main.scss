@@ -8,7 +8,7 @@
   left:     0;
   right:    0;
 
-  max-width: 640px;
+  // max-width: 640px;
   background-color: #CDCDCD;
 
   display:        flex;
@@ -29,6 +29,7 @@
   top:      0;
   bottom:   0;
 
+  color:            #FFFFFF;
   background-color: #636363;
 }
 .menu--offscreen-left {
@@ -60,6 +61,7 @@
 
   height: 6rem;
   background-color: #FFFFFF;
+  z-index: 1;
 }
 .notification.is-hidden {
   top: -100%;
@@ -78,11 +80,35 @@
 }
 #defend-menu {
   text-align: center;
-  color: #FFF;
-
+  .header {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
   .controls {
     margin-right: 8rem;
     margin-left: 8rem;
     flex: 1;
+  }
+}
+#attack-menu {
+  text-align: center;
+
+  .header {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
+  .sprite {
+    flex: 1;
+  }
+  .controls {
+    margin-right: 2rem;
+    margin-left: 2rem;
+  }
+  //Wrapping buttons
+  .buttons--horizontal {
+    flex-wrap: wrap;
+  }
+  .button {
+    flex-basis: 30%;
   }
 }

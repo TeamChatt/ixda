@@ -8,8 +8,9 @@
 
 <body>
   <main class="main">
-    <div class="notification">
-      <p>The monster is about to attack the <strong>MAGES</strong>! Let your teammates know.</p>
+    <!-- Notification -->
+    <div class="notification is-hidden">
+      <p>The monster is about to attack the <strong>WIZARDS</strong>! Let your teammates know.</p>
     </div>
 
     <!-- Top-level menu -->
@@ -19,10 +20,10 @@
       <div class="controls">
         <h3>Ambient Walrus</h3>
         <div class="buttons buttons--horizontal">
-          <button class="button button--circular">
+          <button class="button button--circular" data-action="attack">
             <span class="button_text">Attack</span>
           </button>
-          <button class="button button--circular">
+          <button class="button button--circular" data-action="defend">
             <span class="button_text">Defend</span>
           </button>
         </div>
@@ -30,21 +31,40 @@
     </div>
     <!-- Attack menu -->
     <div id="attack-menu" class="menu menu--offscreen menu--offscreen-left is-hidden">
-      <h2>Attack where?</h2>
+      <header class="header">Attack where?</header>
+      <div class="sprite"></div>
+      <div class="controls">
+        <div class="buttons buttons--horizontal">
+          <button class="button button--circular">
+            <span class="button_text">Head</span>
+          </button>
+          <button class="button button--circular">
+            <span class="button_text">Tail</span>
+          </button>
+          <button class="button button--circular">
+            <span class="button_text">Belly</span>
+          </button>
+          <button class="button button--circular">
+            <span class="button_text">Back</span>
+          </button>
+        </div>
+      </div>
+      <button class="menu_back-button" data-action="back">Back</button>
     </div>
     <!-- Defend menu -->
     <div id="defend-menu" class="menu menu--offscreen menu--offscreen-right is-hidden">
-      <h2>Defend whom?</h2>
+      <header class="header">Defend whom?</header>
       <div class="controls">
         <div class="buttons buttons--vertical">
           <button class="button button--circular">
-            <span class="button_text">Mages</span>
+            <span class="button_text">Wizards</span>
           </button>
           <button class="button button--circular">
             <span class="button_text">Fighters</span>
           </button>
         </div>
       </div>
+      <button class="menu_back-button" data-action="back">Back</button>
     </div>
   </main>
 

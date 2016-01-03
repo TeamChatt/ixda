@@ -1,13 +1,16 @@
 'use strict';
 
-const Bacon      = require('baconjs');
-const connection = require('../lib/connection');
+const Bacon           = require('baconjs');
+const connection      = require('../lib/connection');
+const writeTranscript = require('../lib/write-transcript');
 
-console.log('game master');
 
 connection(receive => {
-  const send = Bacon.once('game master').delay(100);
-  receive.onValue(message => console.log(message));
+  const send = Bacon.once('game master');
+
+  receive
+    .map((message) => message.data)
+    .onValue(writeTranscript);
 
   return send;
 });

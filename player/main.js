@@ -5,13 +5,15 @@ const connection      = require('../lib/connection');
 const writeTranscript = require('../lib/write-transcript');
 
 
+const attack_button = document.querySelector('[data-action="attack"]');
+const evst_attack   = Bacon.fromEvent(attack_button, 'click');
+evst_attack.log();
+
 connection(receive => {
   const send = Bacon.once('player');
 
   receive
-    .log()
     .map((message) => message.data)
-    .log()
     .onValue(writeTranscript);
 
   return send;

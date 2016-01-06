@@ -14,8 +14,8 @@ module.exports = function playerCount(roles_joined, messages_in){
     .evst_ws_player_join
     .map(() => incrementCount);
 
+  //prop number
   return evst_reset_count
     .merge(evst_increment_count)
-    .scan(0, (c,f) => f(c))
-    .map((count) => `There are ${count} players`);
+    .scan(0, (c,f) => f(c));
 };

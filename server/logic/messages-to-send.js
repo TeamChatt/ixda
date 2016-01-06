@@ -6,12 +6,14 @@ const playerCount = require('./player-count');
 const monster     = require('./monster');
 
 module.exports = function messagesToSend(roles_joined, messages_in){
-  const prop_player_count = playerCount(roles_joined, messages_in);
-  const monster_health    = monster(roles_joined, messages_in);
+  const prop_player_count   = playerCount(roles_joined, messages_in)
+    .map((count) => `There are ${count} players`);
+  const prop_monster_health = monster(roles_joined, messages_in)
+    .map((health) => `Monster has ${health} hit points`);
 
   //Force subscription so this keeps the correct value even if nobody needs to know it.
-  monster_health    .onValue(() => {});
-  prop_player_count .onValue(() => {});
+  prop_monster_health  .onValue(() => {});
+  prop_player_count    .onValue(() => {});
 
 
   const evst_st_ping = Bacon.once('ping').delay(10000);
@@ -24,7 +26,7 @@ module.exports = function messagesToSend(roles_joined, messages_in){
     evst_st_send_to_presenters:
       Bacon.mergeAll(
         evst_st_ping,
-        monster_health.toEventStream(),
+        prop_monster_health.toEventStream(),
         prop_player_count.toEventStream()
       ),
 

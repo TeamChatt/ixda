@@ -2,21 +2,10 @@
 
 const Bacon = require('baconjs');
 
-const incrementCount = (c) => c+1;
-const resetCount     = ()  => 0;
+const playerCount = require('./player-count');
 
 module.exports = function messagesToSend(roles_joined, messages_in){
-  const evst_reset_count = messages_in
-    .evst_gm_messages
-    .filter((message) => message.st_content === 'reset')
-    .map(() => resetCount);
-  const evst_increment_count = roles_joined.evst_ws_player_join
-    .map(() => incrementCount);
-
-  const prop_player_count = evst_reset_count
-    .merge(evst_increment_count)
-    .scan(0, (c,f) => f(c))
-    .map((count) => `There are ${count} players`);
+  const prop_player_count = playerCount(roles_joined, messages_in);
 
   //Force subscription so this keeps the correct value even if nobody needs to know it.
   prop_player_count.onValue(() => {});

@@ -6,11 +6,12 @@ const writeTranscript = require('../lib/write-transcript');
 
 
 const reset_button = document.querySelector('[data-action="reset"]');
-const evst_reset   = Bacon.fromEvent(reset_button, 'click');
-evst_reset.log();
+const evst_reset   = Bacon.fromEvent(reset_button, 'click')
+  .map(() => 'reset');
 
 connection(receive => {
-  const send = Bacon.once('game master');
+  const send = Bacon.once('game master')
+    .merge(evst_reset);
 
   receive
     .map((message) => message.data)

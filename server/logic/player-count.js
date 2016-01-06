@@ -10,7 +10,8 @@ module.exports = function playerCount(roles_joined, messages_in){
     .filter((message) => message.st_content === 'reset')
     .map(() => resetCount);
   //Increment the count when a new player joins
-  const evst_increment_count = roles_joined.evst_ws_player_join
+  const evst_increment_count = roles_joined
+    .evst_ws_player_join
     .map(() => incrementCount);
 
   return evst_reset_count

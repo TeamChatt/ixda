@@ -1,13 +1,21 @@
 'use strict';
 
-const Bacon      = require('baconjs');
-const connection = require('../lib/connection');
+const Bacon           = require('baconjs');
+const connection      = require('../lib/connection');
+const writeTranscript = require('../lib/write-transcript');
 
-console.log('game master');
+
+const reset_button  = document.querySelector('[data-action="reset"]');
+const evst_st_reset = Bacon.fromEvent(reset_button, 'click')
+  .map(() => 'reset');
 
 connection(receive => {
-  const send = Bacon.once('game master').delay(100);
-  receive.onValue(message => console.log(message));
+  const send = Bacon.once('game master')
+    .merge(evst_st_reset);
+
+  receive
+    .map((message) => message.data)
+    .onValue(writeTranscript);
 
   return send;
 });

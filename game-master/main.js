@@ -9,12 +9,11 @@ const reset_button  = document.querySelector('[data-action="reset"]');
 const evst_st_reset = Bacon.fromEvent(reset_button, 'click')
   .map(() => 'reset');
 
-connection(receive => {
+connection(evst_st_receive => {
   const send = Bacon.once('game master')
     .merge(evst_st_reset);
 
-  receive
-    .map((message) => message.data)
+  evst_st_receive
     .onValue(writeTranscript);
 
   return send;

@@ -1,5 +1,11 @@
 @import "../lib/css/base";
 
+@media screen and (min-device-width: 1200px) {
+  .main {
+    max-width: 480px;
+  }
+}
+
 //Layout
 .main {
   position: absolute;
@@ -8,7 +14,6 @@
   left:     0;
   right:    0;
 
-  // max-width: 640px;
   background-color: #CDCDCD;
 
   display:        flex;
@@ -23,6 +28,12 @@
 
   display:        flex;
   flex-direction: column;
+}
+.menu_contents {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  z-index: 1;
 }
 .menu--offscreen {
   position: absolute;
@@ -49,6 +60,50 @@
 }
 .menu--offscreen-right.is-hidden {
   right: -100%;
+}
+//Back button
+.menu_back-button {
+  position: absolute;
+  width:    14rem;
+  height:   14rem;
+  border-radius: 100%;
+  text-indent: -9999px;
+  background-color: #636363;
+}
+.menu_back-button {
+  &:before {
+    position: absolute;
+    display: block;
+    content: '';
+    top: 50%;
+  }
+  .menu--offscreen-left &:before {
+    margin-top:   -1rem;
+    border-left:   0;
+    border-top:    1rem solid transparent;
+    border-bottom: 1rem solid transparent;
+    border-right:  1rem solid #FFFFFF;
+    right: 2.5rem;
+  }
+  .menu--offscreen-right &:before {
+    margin-top:   -1rem;
+    border-left:   1rem solid #FFFFFF;
+    border-top:    1rem solid transparent;
+    border-bottom: 1rem solid transparent;
+    border-right:  0;
+    left: 2.5rem;
+  }
+}
+.menu.is-hidden .menu_back-button {
+  display: none;
+}
+.menu--offscreen-left .menu_back-button {
+  bottom: 0;
+  right:  -4rem;
+}
+.menu--offscreen-right .menu_back-button {
+  bottom: 0;
+  left:   -4rem;
 }
 
 //Notifications
@@ -85,8 +140,8 @@
     font-size: 2rem;
   }
   .controls {
-    margin-right: 8rem;
-    margin-left: 8rem;
+    margin-right: 4rem;
+    margin-left: 4rem;
     flex: 1;
   }
 }
@@ -108,7 +163,7 @@
   .buttons--horizontal {
     flex-wrap: wrap;
   }
-  .button {
+  .controls .button {
     flex-basis: 30%;
   }
 }

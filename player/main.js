@@ -2,8 +2,8 @@
 
 const Bacon           = require('baconjs');
 const connection      = require('../lib/connection');
-const writeTranscript = require('../lib/write-transcript');
 
+require('./view');
 
 const attack_button  = document.querySelector('[data-action="attack"]');
 const evst_st_attack = Bacon.fromEvent(attack_button, 'click')
@@ -14,7 +14,7 @@ connection(evst_st_receive => {
     .merge(evst_st_attack);
 
   evst_st_receive
-    .onValue(writeTranscript);
+    .onValue(st_content => console.log(st_content));
 
   return send;
 });

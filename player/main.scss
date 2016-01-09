@@ -1,7 +1,8 @@
 @import "../lib/css/base";
 
-@import "./menu/styles";
-@import "./notification/styles";
+@import "menu/styles";
+@import "notification/styles";
+@import "scene/styles";
 
 @media screen and (min-device-width: 1200px) {
   .main {
@@ -31,7 +32,7 @@
 
 //Top-level menu layout
 #menu-top-level {
-  .sprite {
+  .scene {
     flex: 1;
   }
   .controls {

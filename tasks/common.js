@@ -37,7 +37,18 @@ function css(path){
       .pipe(autoprefixer())
       .pipe(gulp.dest(dest))
       .pipe(connect.reload());
-  }
+  };
+}
+
+function svg(path){
+  var entries = path + '/**/*.svg';
+  var dest    = 'dist/' + path;
+
+  return function(){
+    gulp.src(entries)
+      .pipe(gulp.dest(dest))
+      .pipe(connect.reload());
+  };
 }
 
 function html(path){
@@ -54,5 +65,6 @@ function html(path){
 module.exports = {
   js:   js,
   css:  css,
+  svg:  svg,
   html: html
 };

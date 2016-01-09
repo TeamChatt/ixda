@@ -1,16 +1,16 @@
 //Notifications
 .notification {
   position: fixed;
-  top:   0;
-  left:  0;
-  right: 0;
+  top:      0;
+  left:     0;
+  right:    0;
+  z-index:  100;
 
   background-color: #FFFFFF;
-  z-index: 1;
   transition: top 0.25s;
 
   box-sizing: border-box;
-  padding: 1rem;
+  padding: 0 1rem;
 }
 .notification.is-hidden {
   top: -100%;

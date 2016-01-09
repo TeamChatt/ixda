@@ -1,6 +1,6 @@
 'use strict';
 
-//UI stuff
+//Attack menu
 const attack_button      = document.querySelector('[data-action="select-attack"]');
 const attack_menu        = document.querySelector('#attack-menu');
 const attack_back_button = document.querySelector('#attack-menu [data-action="back"]');
@@ -12,6 +12,7 @@ attack_back_button.addEventListener('click', () => {
   attack_menu.classList.toggle('is-hidden');
 });
 
+//Defend menu
 const defend_button      = document.querySelector('[data-action="select-defend"]');
 const defend_menu        = document.querySelector('#defend-menu');
 const defend_back_button = document.querySelector('#defend-menu [data-action="back"]');

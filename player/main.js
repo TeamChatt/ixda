@@ -1,9 +1,10 @@
 'use strict';
 
-const Bacon           = require('baconjs');
-const connection      = require('../lib/connection');
+const Bacon      = require('baconjs');
+const connection = require('../lib/connection');
 
-require('./view');
+require('./menu/behavior');
+require('./notification/behavior');
 
 const attack_button  = document.querySelector('[data-action="attack"]');
 const evst_st_attack = Bacon.fromEvent(attack_button, 'click')

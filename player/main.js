@@ -9,6 +9,21 @@ const attack_button  = document.querySelector('[data-action="attack"]');
 const evst_st_attack = Bacon.fromEvent(attack_button, 'click')
   .map(() => 'attack');
 
+
+const prop_button_enabled = Bacon.mergeAll(
+    evst_st_attack
+      .map(() => false),
+    evst_st_attack
+      .delay(5000)
+      .map(() => true)
+  )
+  .toProperty(true);
+
+prop_button_enabled
+  .onValue((is_enabled) => {
+    attack_button.disabled = !is_enabled;
+  });
+
 connection(evst_st_receive => {
   const send = Bacon.once('player')
     .merge(evst_st_attack);

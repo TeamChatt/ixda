@@ -25,11 +25,11 @@ function initServer(wss){
 
   //Log stuff
   connection_events.evst_ws_opened
-    .onValue((ws) => console.log(ws + ': opened'));
+    .onValue((ws)      => console.log(`${ws}: opened`));
   connection_events.evst_message
-    .onValue((message) => console.log(message.ws_sender + ': ' + message.st_content));
+    .onValue((message) => console.log(`${message.ws_sender}: ${JSON.stringify(message.content)}`));
   connection_events.evst_ws_closed
-    .onValue((ws) => console.log(ws + ': closed'));
+    .onValue((ws)      => console.log(`${ws}: closed`));
 }
 
 const wss = new WebSocketServer({port: 5555});

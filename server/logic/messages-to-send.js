@@ -16,7 +16,7 @@ module.exports = function messagesToSend(roles_joined, messages_in){
   prop_player_count    .onValue(() => {});
 
 
-  const evst_st_ping = Bacon.once('ping').delay(10000);
+  const evst_st_ping = Bacon.once({type: 'ping'}).delay(10000);
 
   //messages_out:
   return {
@@ -24,19 +24,19 @@ module.exports = function messagesToSend(roles_joined, messages_in){
       Bacon.mergeAll(
         evst_st_ping,
         evst_monster_defeated
-          .map(() => `Monster was defeated`)
+          .map(() => ({type: 'monster-defeated'}))
       ),
 
     evst_st_send_to_presenters:
       Bacon.mergeAll(
         evst_st_ping,
         prop_monster_health
-          .map((health) => `Monster has ${health} hit points`)
+          .map((health) => ({type: 'monster-health', value: health}))
           .toEventStream(),
         evst_monster_defeated
-          .map(() => `Monster was defeated`),
+          .map(() => ({type: 'monster-defeated'})),
         prop_player_count
-          .map((count) => `There are ${count} players`)
+          .map((count) => ({type: 'player-count', value: count}))
           .toEventStream()
       ),
 

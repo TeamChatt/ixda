@@ -19,7 +19,7 @@ const sendMessages = (evst_st_content) => (ws) => {
   evst_st_content
     .takeUntil(Bacon.fromEvent(ws, 'close'))
     .onValue((st_content) => {
-      console.log('sending... ' + st_content + ' to ' + ws);
+      console.log('sent(' + ws.upgradeReq.headers['sec-websocket-key'] + '): \"' + st_content + '\"');
       ws.send(st_content);
     });
 };

@@ -23,13 +23,7 @@ function initServer(wss){
   roles_joined.evst_ws_gm_join
     .onValue(util.sendMessages(messages_out.evst_st_send_to_gms));
 
-  //Log stuff
-  connection_events.evst_ws_opened
-    .onValue((ws) => console.log(ws + ': opened'));
-  connection_events.evst_message
-    .onValue((message) => console.log(message.ws_sender + ': ' + message.st_content));
-  connection_events.evst_ws_closed
-    .onValue((ws) => console.log(ws + ': closed'));
+  console.log("Server Initialized");
 }
 
 const wss = new WebSocketServer({port: 5555});

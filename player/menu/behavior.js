@@ -1,25 +1,24 @@
 'use strict';
 
-//Attack menu
-const attack_button      = document.querySelector('[data-action="select-attack"]');
-const attack_menu        = document.querySelector('#attack-menu');
-const attack_back_button = document.querySelector('#attack-menu [data-action="back"]');
+const menu_elements = require('./elements');
+const menuEvents    = require('./events');
+const menuState     = require('./state');
 
-attack_button.addEventListener('click', () => {
-  attack_menu.classList.toggle('is-hidden');
-});
-attack_back_button.addEventListener('click', () => {
-  attack_menu.classList.toggle('is-hidden');
-});
 
-//Defend menu
-const defend_button      = document.querySelector('[data-action="select-defend"]');
-const defend_menu        = document.querySelector('#defend-menu');
-const defend_back_button = document.querySelector('#defend-menu [data-action="back"]');
+const menu_events = menuEvents(menu_elements);
+const menu_state  = menuState(menu_events);
 
-defend_button.addEventListener('click', () => {
-  defend_menu.classList.toggle('is-hidden');
-});
-defend_back_button.addEventListener('click', () => {
-  defend_menu.classList.toggle('is-hidden');
-});
+//Behavior
+menu_state.prop_attack_menu_shown
+  .onValue((is_shown) => {
+    menu_elements.attack_menu
+      .classList
+      .toggle('is-hidden', !is_shown);
+  });
+
+menu_state.prop_defend_menu_shown
+  .onValue((is_shown) => {
+    menu_elements.defend_menu
+      .classList
+      .toggle('is-hidden', !is_shown);
+  });

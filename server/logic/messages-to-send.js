@@ -18,14 +18,16 @@ module.exports = function messagesToSend(roles_joined, messages_in){
 
   const evst_st_ping = Bacon.once({type: 'ping'}).delay(10000);
 
+  const evst_st_send_to_players = Bacon.mergeAll(
+    evst_st_ping,
+    evst_monster_defeated
+      .map(() => ({type: 'monster-defeated'}))
+  );
+
   //messages_out:
   return {
-    evst_st_send_to_players:
-      Bacon.mergeAll(
-        evst_st_ping,
-        evst_monster_defeated
-          .map(() => ({type: 'monster-defeated'}))
-      ),
+    evst_st_send_to_wizards:  evst_st_send_to_players,
+    evst_st_send_to_fighters: evst_st_send_to_players,
 
     evst_st_send_to_presenters:
       Bacon.mergeAll(

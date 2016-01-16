@@ -4,16 +4,20 @@ const util = require('../util');
 
 
 module.exports = function messagesReceived(roles){
-  const evst_player_messages    = roles.evst_ws_player_join
-    .flatMap(util.messagesFromWebSocket);
-  const evst_presenter_messages = roles.evst_ws_presenter_join
-    .flatMap(util.messagesFromWebSocket);
-  const evst_gm_messages        = roles.evst_ws_gm_join
-    .flatMap(util.messagesFromWebSocket);
+  function messagesFromRole(evst_ws_role_join){
+    return evst_ws_role_join
+      .flatMap(util.messagesFromWebSocket);
+  }
 
   return {
-    evst_player_messages:    evst_player_messages,
-    evst_presenter_messages: evst_presenter_messages,
-    evst_gm_messages:        evst_gm_messages
+    //Players
+    evst_wizard_messages:    messagesFromRole(roles.evst_ws_wizard_join),
+    evst_fighter_messages:   messagesFromRole(roles.evst_ws_fighter_join),
+
+    //Presenter
+    evst_presenter_messages: messagesFromRole(roles.evst_ws_presenter_join),
+
+    //Game Master
+    evst_gm_messages:        messagesFromRole(roles.evst_ws_gm_join)
   };
 };

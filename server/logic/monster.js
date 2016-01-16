@@ -1,5 +1,7 @@
 'use strict';
 
+const Bacon = require('baconjs');
+
 const resetHP     = ()  => 10;
 const decrementHP = (c) => c-1;
 
@@ -10,8 +12,10 @@ module.exports = function monster(roles_joined, messages_in){
     .filter((message) => message.st_content === 'reset')
     .map(() => resetHP);
   //Decrement the monsters health when a player attacks
-  const evst_attack_monster = messages_in
-    .evst_player_messages
+  const evst_attack_monster = Bacon.mergeAll(
+      messages_in.evst_wizard_messages,
+      messages_in.evst_fighter_messages
+    )
     .filter((message) => message.st_content === 'attack')
     .map(() => decrementHP);
 

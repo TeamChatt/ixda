@@ -16,8 +16,10 @@ function initServer(wss){
   const messages_out      = messagesToSend(roles_joined, messages_in);
 
   //Send messages to clients
-  roles_joined.evst_ws_player_join
-    .onValue(util.sendMessages(messages_out.evst_st_send_to_players));
+  roles_joined.evst_ws_wizard_join
+    .onValue(util.sendMessages(messages_out.evst_st_send_to_wizards));
+  roles_joined.evst_ws_fighter_join
+    .onValue(util.sendMessages(messages_out.evst_st_send_to_fighters));
   roles_joined.evst_ws_presenter_join
     .onValue(util.sendMessages(messages_out.evst_st_send_to_presenters));
   roles_joined.evst_ws_gm_join

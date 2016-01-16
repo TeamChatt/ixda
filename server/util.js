@@ -21,7 +21,8 @@ const sendMessages = (evst_message) => (ws) => {
     .takeUntil(Bacon.fromEvent(ws, 'close'))
     .map(JSON.stringify)
     .onValue((st_content) => {
-      console.log('sending... ' + st_content + ' to ' + ws);
+      const recipient = ws.upgradeReq.headers['sec-websocket-key'];
+      console.log(`sent(${recipient}): "${st_content}"`);
       ws.send(st_content);
     });
 };

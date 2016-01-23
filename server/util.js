@@ -6,26 +6,28 @@ const Bacon = require('baconjs');
 function messagesFromWebSocket(ws){
   //evst_message
   return Bacon.fromEvent(ws, 'message')
-    .map(st_content => makeMessage(ws, st_content));
+    .map(JSON.parse)
+    .map(content => makeMessage(ws, content));
 }
-function makeMessage(ws_sender, st_content){
+function makeMessage(ws_sender, content){
   //message
   return {
     ws_sender: ws_sender,
-    st_content: st_content
+    content:   content
   };
 }
-const sendMessages = (evst_st_content) => (ws) => {
-  evst_st_content
+const sendMessages = (evst_message) => (ws) => {
+  evst_message
     .takeUntil(Bacon.fromEvent(ws, 'close'))
+    .map(JSON.stringify)
     .onValue((st_content) => {
-      console.log('sending... ' + st_content + ' to ' + ws);
+      const recipient = ws.upgradeReq.headers['sec-websocket-key'];
+      console.log(`sent(${recipient}): "${st_content}"`);
       ws.send(st_content);
     });
 };
 
 module.exports = {
-  makeMessage:           makeMessage,
   messagesFromWebSocket: messagesFromWebSocket,
   sendMessages:          sendMessages
 };

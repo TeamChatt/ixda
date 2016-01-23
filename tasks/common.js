@@ -17,7 +17,8 @@ function js(path) {
     browserify({entries: entries, debug: true})
       .transform(babelify.configure({
         sourceMaps:        'inline',
-        sourceMapRelative: '/Users/mattk/Desktop/ixda'
+        sourceMapRelative: '/Users/mattk/Desktop/ixda',
+        presets:           ['es2015']
       }))
       .bundle()
       .pipe(source('main.js'))

@@ -5,11 +5,10 @@ const connection      = require('../lib/connection');
 const writeTranscript = require('../lib/write-transcript');
 
 
-connection(receive => {
+connection(evst_st_receive => {
   const send = Bacon.once('presenter');
 
-  receive
-    .map((message) => message.data)
+  evst_st_receive
     .onValue(writeTranscript);
 
   return send;

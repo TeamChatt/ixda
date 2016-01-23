@@ -21,28 +21,14 @@
 }
 
 
-.meter {
-  background-color: #D8D8D8;
-}
-.meter_fill {
-  position: relative;
-  display: inline-block;
-  height: 100%;
+.player-metrics{
 
-  &:before {
-    content:  '';
-    display:  block;
-    position: absolute;
-    width:    100%;
-    height:   100%;
-
-    background-color: #525252;
-    transform:        skewX(-12deg);
-  }
 }
-.meter--small {
-  height: 2rem;
+.player-metrics_attacking:before,
+.player-metrics_attacking:after {
+  background-color: crimson;
 }
-.meter--large {
-  height: 8rem;
+.player-metrics_defending:before,
+.player-metrics_defending:after {
+  background-color: steelblue;
 }

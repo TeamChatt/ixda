@@ -4,7 +4,11 @@
   background: url("scene/stars.svg");
 }
 
-.scene_player {
+.scene_ground {
+  width:            100%;
+  height:           16rem;
+  background-color: #525252;
+
   align-self: flex-end;
-  margin: 0 auto;
+  margin:     0 auto;
 }

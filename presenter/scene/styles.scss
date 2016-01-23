@@ -1,0 +1,10 @@
+//Scene
+.scene {
+  display: flex;
+  background: url("scene/stars.svg");
+}
+
+.scene_player {
+  align-self: flex-end;
+  margin: 0 auto;
+}

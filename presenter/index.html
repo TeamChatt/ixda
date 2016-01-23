@@ -8,16 +8,31 @@
 
 <body>
   <main class="main">
-    <!-- Notification -->
-    <div class="notification is-hidden">
-      <p>The monster attacks</p>
+    <!-- Scene -->
+    <div class="scene">
+      <div class="sprite">
+      </div>
     </div>
 
-    <!-- Monster -->
-    <div class="sprite">
+    <!-- Heads Up Display -->
+    <div class="hud">
+      <div class="hud_row">
+        <div class="meter meter--small health-bar">
+          <div class="meter_fill meter_fill--left" style="width: 40%;"></div>
+        </div>
+      </div>
+
+      <div class="hud_row">
+        <div class="notification">
+          The monster attacks
+        </div>
+        <div class="meter meter--large player-metrics">
+          <div class="meter_fill meter_fill--left  player-metrics_attacking" style="width: 40%;"></div><!--
+       --><div class="meter_fill meter_fill--right player-metrics_defending" style="width: 60%;"></div>
+        </div>
+      </div>
     </div>
   </main>
-  <div class="transcript"></div>
 
   <script src="main.js"></script>
 </body>

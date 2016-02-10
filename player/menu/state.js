@@ -9,6 +9,9 @@ module.exports = (menu_events) => {
         .map(() => true),
       menu_events
         .evst_attack_back_click
+        .map(() => false),
+      menu_events
+        .evst_attack_target
         .map(() => false)
     )
     .toProperty(false);
@@ -19,14 +22,17 @@ module.exports = (menu_events) => {
         .map(() => true),
       menu_events
         .evst_defend_back_click
+        .map(() => false),
+      menu_events
+        .evst_defend_target
         .map(() => false)
     )
     .toProperty(false);
 
 
   const evst_button_clicked = Bacon.mergeAll(
-      menu_events.evst_attack_click,
-      menu_events.evst_defend_click
+      menu_events.evst_attack_target,
+      menu_events.evst_defend_target
     );
   const prop_cooldown = Bacon.mergeAll(
       evst_button_clicked.map(() => true),

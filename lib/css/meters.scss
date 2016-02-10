@@ -27,6 +27,10 @@
     background-color: #525252;
   }
 }
+.meter_fill{
+  transition: width 0.25s;
+}
+
 .meter_fill--left:after {
   left: 0;
 }

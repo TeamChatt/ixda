@@ -3,13 +3,9 @@
 const Bacon      = require('baconjs');
 const connection = require('../lib/connection');
 
-// require('./menu/behavior');
-// require('./notification/behavior');
 
-const dom = require('./menu/dom');
-const el  = dom().run();
-
-document.querySelector('body').appendChild(el);
+const view = require('./view');
+document.querySelector('body').appendChild(view().el);
 
 //DOM elements
 const wizard_button  = document.querySelector('[data-action="role-wizard"]');

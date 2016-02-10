@@ -6,22 +6,14 @@ function buttonEffects(state){
   return dom
     .open('canvas', {'class': 'button_effects', 'width':'1000', 'height':'1000'}).close();
 }
-function notification(state){
-  return dom
-    .open('div', {'id': 'notification', 'class': 'notification is-hidden'})
-      .open('p')
-        .text('The monster is about to attack the ')
-        .open('strong').text('WIZARDS').close().text('! ')
-        .text('Let your teammates know.')
-      .close()
-    .close();
-}
 function topLevelMenu(state){
   return dom
     .open('div', {'id': 'menu-top-level', 'class': 'menu'})
+      //Scene
       .open('div', {'class': 'scene'})
-        .open('img', {'class': 'scene_player', src: './scene/sprites_fighter01.svg'}).close()
+        .open('img', {'class': 'scene_player', 'src': './scene/sprites_fighter01.svg'}).close()
       .close()
+      //Controls
       .open('div', {'class': 'controls'})
         .open('h3').text('Ambient Walrus').close()
         .open('div', {'class':'buttons buttons--horizontal'})
@@ -38,8 +30,12 @@ function topLevelMenu(state){
     .close();
 }
 function attackMenu(state){
+  const menu_classes = state.prop_attack_menu_shown
+    .map(is_shown => is_shown ? '' : 'is-hidden')
+    .map(hidden => `menu menu--offscreen menu--offscreen-left ${hidden}`);
+
   return dom
-    .open('div', {'id':'attack-menu', 'class':'menu menu--offscreen menu--offscreen-left is-hidden'})
+    .open('div', {'id':'attack-menu', 'class': menu_classes})
       .open('div', {'class': 'menu_contents'})
         .open('header', {'class': 'header'}).text('Attack where?').close()
         .open('div', {'class': 'sprite'}).close()
@@ -60,12 +56,17 @@ function attackMenu(state){
           .close()
         .close()
       .close()
+      //Back button
       .open('button', {'class': 'button menu_back-button', 'data-action':'back'}).text('Go Back').close()
     .close();
 }
 function defendMenu(state){
+  const menu_classes = state.prop_defend_menu_shown
+    .map(is_shown => is_shown ? '' : 'is-hidden')
+    .map(hidden => `menu menu--offscreen menu--offscreen-right ${hidden}`);
+
   return dom
-    .open('div', {'class': 'menu menu--offscreen menu--offscreen-right is-hidden'})
+    .open('div', {'id': 'defend-menu', 'class': menu_classes})
       .open('div', {'class': 'menu_contents'})
         .open('header', {'class': 'header'}).text('Defend whom?').close()
         .open('div', {'class': 'controls'})
@@ -79,15 +80,13 @@ function defendMenu(state){
           .close()
         .close()
       .close()
+      //Back button
       .open('button', {'class': 'button menu_back-button', 'data-action':'back'}).text('Go Back').close()
     .close();
 }
 
-module.exports = function(state){
-  return dom
-    .open('main', {'class': 'main'})
-      ._append(notification(state))
-      ._append(topLevelMenu(state))
-      ._append(attackMenu(state))
-      ._append(defendMenu(state));
-};
+module.exports = (state) =>
+  dom.open('div', {'class': 'combat-menus'})
+    ._append(topLevelMenu(state))
+    ._append(attackMenu(state))
+    ._append(defendMenu(state));

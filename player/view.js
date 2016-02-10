@@ -5,14 +5,15 @@ const view  = require('../lib/view');
 const dom   = require('./dom');
 
 module.exports = () =>
-  view((evst_el) => {
+  view((/* evst_el */) => {
+    const events = {
+      notify: Bacon.once('message').delay(10000)
+    };
     const state = {
-      attack_menu_shown: Bacon.constant(false),
-      defend_menu_shown: Bacon.constant(false)
     };
 
     return {
-      el: dom(state).run(),
+      el: dom(events, state).run(),
       events: null
     };
   });

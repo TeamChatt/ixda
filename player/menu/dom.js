@@ -12,7 +12,6 @@ class TimerSweepHook {
       .changes()
       .filter((is_cooldown) => is_cooldown)
       .onValue(() => {
-        console.log(el);
         timerSweep(el, 5000);
       });
   }

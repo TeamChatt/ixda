@@ -1,19 +1,20 @@
 .notification {
-  font-weight: lighter;
-  font-size:   2rem;
-  box-sizing:  border-box;
-  padding:     2rem;
-  text-align:  center;
-  white-space: nowrap;
+  font-weight:   lighter;
+  font-size:     2rem;
+  box-sizing:    border-box;
+  padding:       2rem;
+  text-align:    center;
+  white-space:   nowrap;
+  overflow:      hidden;
 
   color:            #FFFFFF;
   text-transform:   uppercase;
   font-style:       italic;
 }
 .notification {
-  animation: marquee 5s 1;
+  animation:                 marquee 5s 1;
   animation-timing-function: cubic-bezier(0,1,1,0);
-  animation-fill-mode: forwards;
+  animation-fill-mode:       forwards;
 }
 .notification.is-hidden {
   opacity: 0;

@@ -51,6 +51,17 @@ function svg(path){
   };
 }
 
+function images(path){
+  var entries = path + '/**/*.png';
+  var dest    = 'dist/' + path;
+
+  return function(){
+    gulp.src(entries)
+      .pipe(gulp.dest(dest))
+      .pipe(connect.reload());
+  };
+}
+
 function html(path){
   var entries = path + '/index.html';
   var dest    = 'dist/' + path;
@@ -63,8 +74,9 @@ function html(path){
 }
 
 module.exports = {
-  js:   js,
-  css:  css,
-  svg:  svg,
-  html: html
+  js:     js,
+  css:    css,
+  svg:    svg,
+  images: images,
+  html:   html
 };

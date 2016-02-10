@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "baconjs": "^0.7.83",
+    "virtual-dom": "^2.1.1",
     "ws": "^0.8.1"
   },
   "devDependencies": {

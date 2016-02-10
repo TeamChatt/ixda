@@ -3,8 +3,13 @@
 const Bacon      = require('baconjs');
 const connection = require('../lib/connection');
 
-require('./menu/behavior');
-require('./notification/behavior');
+// require('./menu/behavior');
+// require('./notification/behavior');
+
+const dom = require('./menu/dom');
+const el  = dom().run();
+
+document.querySelector('body').appendChild(el);
 
 //DOM elements
 const wizard_button  = document.querySelector('[data-action="role-wizard"]');
@@ -24,33 +29,6 @@ const evst_st_role   = Bacon.mergeAll(
 const evst_st_attack = evst_st_role
   .flatMap(() => Bacon.fromEvent(attack_button, 'click'))
   .map(() => ({type: 'attack'}));
-
-//Button states
-const prop_attack_button_enabled = Bacon.mergeAll(
-    evst_st_role
-      .map(() => true),
-    evst_st_attack
-      .map(() => false),
-    evst_st_attack
-      .map(() => true)
-      .delay(5000)
-  )
-  .toProperty(false);
-
-prop_attack_button_enabled
-  .onValue((is_enabled) => {
-    attack_button.disabled = !is_enabled;
-  });
-
-const prop_role_buttons_enabled = evst_st_role
-  .map(() => false)
-  .toProperty(true);
-
-prop_role_buttons_enabled
-  .onValue((is_enabled) => {
-    wizard_button.disabled  = !is_enabled;
-    fighter_button.disabled = !is_enabled;
-  });
 
 //Connection
 connection(evst_st_receive => {

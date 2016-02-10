@@ -1,6 +1,7 @@
 //Scene
 .scene {
-  display: flex;
+  display:    flex;
+  flex-flow:  column;
   background: url("scene/stars.svg");
 }
 
@@ -9,6 +10,17 @@
   height:           16rem;
   background-color: #525252;
 
-  align-self: flex-end;
-  margin:     0 auto;
+  position: absolute;
+  bottom:   0;
+  left:     0;
+}
+
+.sprite {
+  flex: 1;
+
+  background-image:    url("scene/monster.png");
+  background-repeat:   no-repeat;
+  background-size:     contain;
+  background-position: center center;
+  image-rendering:     pixelated;
 }

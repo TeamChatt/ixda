@@ -1,12 +1,35 @@
 'use strict';
 
-const dom = require('../../lib/dom');
+const dom        = require('../../lib/dom');
+const timerSweep = require('../../lib/effects/timer-sweep');
 
-function buttonEffects(state){
+class TimerSweepHook {
+  constructor(prop_cooldown){
+    this.prop_cooldown = prop_cooldown;
+  }
+  hook(el){
+    this.prop_cooldown
+      .changes()
+      .filter((is_cooldown) => is_cooldown)
+      .onValue(() => {
+        console.log(el);
+        timerSweep(el, 5000);
+      });
+  }
+}
+
+function buttonEffects(prop_cooldown){
   return dom
-    .open('canvas', {'class': 'button_effects', 'width':'1000', 'height':'1000'}).close();
+    .open('canvas', {
+      'class':       'button_effects',
+      'width':       '1000',
+      'height':      '1000',
+      'timer-sweep': new TimerSweepHook(prop_cooldown)
+    }).close();
 }
 function topLevelMenu(state){
+  const prop_disabled = state.prop_cooldown;
+
   return dom
     .open('div', {'id': 'menu-top-level', 'class': 'menu'})
       //Scene
@@ -17,13 +40,13 @@ function topLevelMenu(state){
       .open('div', {'class': 'controls'})
         .open('h3').text('Ambient Walrus').close()
         .open('div', {'class':'buttons buttons--horizontal'})
-          .open('button', {'class':'button button--circular', 'data-action':'select-attack'})
+          .open('button', {'class':'button button--circular', 'data-action':'select-attack', 'disabled':prop_disabled})
             .open('span', {'class':'button_text'}).text('Attack').close()
-            ._append(buttonEffects(state))
+            ._append(buttonEffects(prop_disabled))
           .close()
-          .open('button', {'class':'button button--circular', 'data-action':'select-defend'})
+          .open('button', {'class':'button button--circular', 'data-action':'select-defend', 'disabled':prop_disabled})
             .open('span', {'class':'button_text'}).text('Defend').close()
-            ._append(buttonEffects(state))
+            ._append(buttonEffects(prop_disabled))
           .close()
         .close()
       .close()

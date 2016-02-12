@@ -1,12 +1,10 @@
 'use strict';
 
-const dom          = require('../lib/dom');
-const menu         = require('./menu/view');
-const notification = require('./notification/view');
+const dom = require('../lib/dom');
 
-module.exports = (events, state) => {
+module.exports = (events, state, views) => {
   return dom
     .open('main', {'class': 'main'})
-      .view(menu(events, state))
-      .view(notification(events, state));
+      .view(views.menu)
+      .view(views.notification);
 };

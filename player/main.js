@@ -4,16 +4,18 @@ const Bacon      = require('baconjs');
 const connection = require('../lib/connection');
 
 
-const view = require('./view');
-document.querySelector('body').appendChild(view().el);
+const view = require('./view')();
+document.querySelector('body').appendChild(view.el);
 
-//DOM events
-const evst_st_role   = Bacon.once('fighter');
+//Events
+const evst_role = Bacon.once('fighter');
 
 //Connection
 connection(evst_st_receive => {
   const send = Bacon.mergeAll(
-      evst_st_role
+      view.events.evst_attack_target.map((target) => ({type: 'attack', value: target})),
+      view.events.evst_defend_target.map((target) => ({type: 'defend', value: target})),
+      evst_role.map((role) => ({type: 'role', value: role}))
     );
 
   evst_st_receive
